@@ -1,0 +1,389 @@
+{% extends "base.html" %}
+
+{% block title %}
+Edit Property | Style Mantra
+{% endblock %}
+
+{% block content %}
+
+<section class="add-property-page">
+
+    <div class="add-property-container">
+
+        <!-- HEADER -->
+
+        <div class="add-property-header">
+
+            <div>
+
+                <p class="section-label">
+                    OWNER PORTAL
+                </p>
+
+                <h1>
+                    Edit Property
+                </h1>
+
+                <p>
+                    Update your property listing.
+                </p>
+
+            </div>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="back-dashboard"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <!-- FORM -->
+
+        <form
+            method="POST"
+            enctype="multipart/form-data"
+            class="property-form-card"
+        >
+
+            <div class="form-section">
+
+                <h2>
+                    Property Information
+                </h2>
+
+
+                <div class="form-grid">
+
+
+                    <!-- PROPERTY TITLE -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Property Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            value="{{ property['title'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PROPERTY TYPE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Property Type
+                        </label>
+
+                        <select
+                            name="property_type"
+                            required
+                        >
+
+                            <option
+                                value="Residential"
+                                {% if property['property_type'] == 'Residential' %}
+                                selected
+                                {% endif %}
+                            >
+                                Residential
+                            </option>
+
+
+                            <option
+                                value="Commercial"
+                                {% if property['property_type'] == 'Commercial' %}
+                                selected
+                                {% endif %}
+                            >
+                                Commercial
+                            </option>
+
+
+                            <option
+                                value="Warehouse"
+                                {% if property['property_type'] == 'Warehouse' %}
+                                selected
+                                {% endif %}
+                            >
+                                Warehouse
+                            </option>
+
+
+                            <option
+                                value="Industrial"
+                                {% if property['property_type'] == 'Industrial' %}
+                                selected
+                                {% endif %}
+                            >
+                                Industrial
+                            </option>
+
+
+                            <option
+                                value="Plot"
+                                {% if property['property_type'] == 'Plot' %}
+                                selected
+                                {% endif %}
+                            >
+                                Plot
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- PRICE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Price
+                        </label>
+
+                        <input
+                            type="text"
+                            name="price"
+                            value="{{ property['price'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- LOCATION -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            value="{{ property['location'] }}"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- AREA -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Area
+                        </label>
+
+                        <input
+                            type="text"
+                            name="area"
+                            value="{{ property['area'] or '' }}"
+                        >
+
+                    </div>
+
+
+                    <!-- BEDROOMS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Bedrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="bedrooms"
+                            value="{{ property['bedrooms'] or '' }}"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <!-- BATHROOMS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Bathrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="bathrooms"
+                            value="{{ property['bathrooms'] or '' }}"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <!-- STATUS -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Status
+                        </label>
+
+                        <select name="status">
+
+                            <option
+                                value="Available"
+                                {% if property['status'] == 'Available' %}
+                                selected
+                                {% endif %}
+                            >
+                                Available
+                            </option>
+
+
+                            <option
+                                value="Sold"
+                                {% if property['status'] == 'Sold' %}
+                                selected
+                                {% endif %}
+                            >
+                                Sold
+                            </option>
+
+
+                            <option
+                                value="Rented"
+                                {% if property['status'] == 'Rented' %}
+                                selected
+                                {% endif %}
+                            >
+                                Rented
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <!-- DESCRIPTION -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Description
+                        </label>
+
+                        <textarea
+                            name="description"
+                            rows="7"
+                        >{{ property['description'] or '' }}</textarea>
+
+                    </div>
+
+
+                    <!-- CURRENT IMAGE -->
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Property Image
+                        </label>
+
+
+                        {% if property["image"] %}
+
+                        <div
+                            style="
+                                margin-bottom: 15px;
+                            "
+                        >
+
+                            <p
+                                style="
+                                    color: #A5A5A5;
+                                    font-size: 13px;
+                                    margin-bottom: 10px;
+                                "
+                            >
+                                Current Image
+                            </p>
+
+
+                            <img
+                                src="{{ url_for(
+                                    'static',
+                                    filename=property['image']
+                                ) }}"
+                                alt="{{ property['title'] }}"
+                                style="
+                                    width: 180px;
+                                    height: 120px;
+                                    object-fit: cover;
+                                    border: 1px solid rgba(201,162,39,0.4);
+                                "
+                            >
+
+                        </div>
+
+                        {% endif %}
+
+
+                        <input
+                            type="file"
+                            name="image"
+                            accept=".jpg,.jpeg,.png,.webp"
+                        >
+
+
+                        <small>
+                            Leave empty to keep the current image.
+                        </small>
+
+                    </div>
+
+
+                </div>
+
+            </div>
+
+
+            <!-- FORM ACTIONS -->
+
+            <div class="form-actions">
+
+                <a
+                    href="{{ url_for('dashboard') }}"
+                    class="cancel-button"
+                >
+                    Cancel
+                </a>
+
+
+                <button
+                    type="submit"
+                    class="gold-button"
+                >
+                    Save Changes
+                </button>
+
+            </div>
+
+
+        </form>
+
+    </div>
+
+</section>
+
+{% endblock %}

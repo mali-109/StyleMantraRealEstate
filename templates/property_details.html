@@ -1,0 +1,337 @@
+{% extends "base.html" %}
+
+{% block title %}
+{{ property["title"] }} | Style Mantra Real Estate
+{% endblock %}
+
+
+{% block content %}
+
+<section class="property-details-page">
+
+    <div class="property-details-container">
+
+
+        <!-- BACK BUTTON -->
+
+        <a
+            href="{{ url_for('home') }}#properties"
+            class="back-dashboard"
+        >
+            ← Back to Properties
+        </a>
+
+
+        <!-- PROPERTY IMAGE -->
+
+        <div class="property-details-image">
+
+            {% if property["image"] %}
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename=property['image']
+                ) }}"
+                alt="{{ property['title'] }}"
+            >
+
+            {% else %}
+
+            <div class="property-details-placeholder">
+                🏠
+            </div>
+
+            {% endif %}
+
+        </div>
+
+
+        <!-- PROPERTY INFORMATION -->
+
+        <div class="property-details-content">
+
+
+            <!-- TITLE AND PRICE -->
+
+            <div class="property-details-top">
+
+                <div>
+
+                    <p class="property-type">
+                        {{ property["property_type"]|upper }}
+                    </p>
+
+                    <h1>
+                        {{ property["title"] }}
+                    </h1>
+
+                    <p class="property-location">
+                        📍 {{ property["location"] }}
+                    </p>
+
+                </div>
+
+
+                <div class="property-details-price">
+                    ₹{{ property["price"] }}
+                </div>
+
+            </div>
+
+
+            <!-- FEATURES -->
+
+            <div class="property-feature-grid">
+
+                {% if property["area"] %}
+
+                <div class="property-feature">
+
+                    <span>
+                        AREA
+                    </span>
+
+                    <strong>
+                        {{ property["area"] }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if property["bedrooms"] %}
+
+                <div class="property-feature">
+
+                    <span>
+                        BEDROOMS
+                    </span>
+
+                    <strong>
+                        {{ property["bedrooms"] }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                {% if property["bathrooms"] %}
+
+                <div class="property-feature">
+
+                    <span>
+                        BATHROOMS
+                    </span>
+
+                    <strong>
+                        {{ property["bathrooms"] }}
+                    </strong>
+
+                </div>
+
+                {% endif %}
+
+
+                <div class="property-feature">
+
+                    <span>
+                        STATUS
+                    </span>
+
+                    <strong>
+                        {{ property["status"] }}
+                    </strong>
+
+                </div>
+
+            </div>
+
+
+            <!-- DESCRIPTION -->
+
+            <div class="property-description">
+
+                <p class="section-label">
+                    PROPERTY OVERVIEW
+                </p>
+
+                <h2>
+                    About This Property
+                </h2>
+
+                <p>
+                    {{ property["description"] }}
+                </p>
+
+            </div>
+
+
+            <!-- ENQUIRY CTA -->
+
+            <div class="property-enquiry">
+
+                <div>
+
+                    <p class="section-label">
+                        INTERESTED?
+                    </p>
+
+                    <h2>
+                        Interested in this Property?
+                    </h2>
+
+                    <p>
+                        Send us your details and our
+                        team will contact you.
+                    </p>
+
+                </div>
+
+
+                <a
+                    href="#enquiry-form"
+                    class="gold-button"
+                >
+                    Enquire Now →
+                </a>
+
+            </div>
+
+
+            <!-- =================================
+                 ENQUIRY FORM
+            ================================== -->
+
+            <div
+                class="enquiry-form-section"
+                id="enquiry-form"
+            >
+
+                <div class="enquiry-form-header">
+
+                    <p class="section-label">
+                        PROPERTY ENQUIRY
+                    </p>
+
+                    <h2>
+                        Make an Enquiry
+                    </h2>
+
+                    <p>
+                        Fill in your details and
+                        Style Mantra Real Estate
+                        will contact you.
+                    </p>
+
+                </div>
+
+
+                <!-- FORM -->
+
+                <form
+                    method="POST"
+                    action="{{ url_for(
+                        'property_enquiry',
+                        property_id=property['id']
+                    ) }}"
+                    class="enquiry-form"
+                >
+
+
+                    <!-- NAME -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Full Name
+                        </label>
+
+                        <input
+                            type="text"
+                            name="name"
+                            placeholder="Enter your full name"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- EMAIL -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Email Address
+                        </label>
+
+                        <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email address"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- PHONE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Phone Number
+                        </label>
+
+                        <input
+                            type="tel"
+                            name="phone"
+                            placeholder="Enter your phone number"
+                            required
+                        >
+
+                    </div>
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="form-group">
+
+                        <label>
+                            Message
+                        </label>
+
+                        <textarea
+                            name="message"
+                            rows="6"
+                            placeholder="I am interested in this property. Please contact me."
+                            required
+                        ></textarea>
+
+                    </div>
+
+
+                    <!-- SEND -->
+
+                    <button
+                        type="submit"
+                        class="gold-button enquiry-submit"
+                    >
+                        Send Enquiry →
+                    </button>
+
+
+                </form>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

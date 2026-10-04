@@ -1,0 +1,370 @@
+/* =====================================================
+   STYLE MANTRA REAL ESTATE
+   RESPONSIVE DESIGN
+===================================================== */
+
+
+/* =====================================================
+   TABLET
+===================================================== */
+
+@media (max-width: 1000px) {
+
+    .nav-menu {
+        gap: 18px;
+    }
+
+    .nav-menu a {
+        font-size: 13px;
+    }
+
+    .hero-content {
+        max-width: 700px;
+    }
+
+    .hero-content h1 {
+        font-size: 58px;
+    }
+
+    .property-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .services-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+        gap: 50px;
+    }
+
+    .contact-content {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+}
+
+
+/* =====================================================
+   MOBILE
+===================================================== */
+
+@media (max-width: 700px) {
+
+    /* ---------- GLOBAL ---------- */
+
+    body {
+        overflow-x: hidden;
+    }
+
+    section {
+        width: 100%;
+        box-sizing: border-box;
+    }
+
+
+    /* ---------- NAVBAR ---------- */
+
+    .navbar {
+        padding: 15px 5%;
+    }
+
+    .nav-container {
+        width: 100%;
+    }
+
+    .nav-menu {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        padding: 25px 5%;
+        box-sizing: border-box;
+        background: #080808;
+        border-top: 1px solid rgba(201, 162, 39, 0.25);
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+        z-index: 999;
+    }
+
+    .nav-menu.mobile-open {
+        display: flex;
+    }
+
+    .mobile-menu {
+        display: flex;
+    }
+
+    .nav-menu a {
+        font-size: 14px;
+    }
+
+
+    /* ---------- HERO ---------- */
+
+    .hero {
+        min-height: 90vh;
+        padding: 130px 5% 70px;
+    }
+
+    .hero-content {
+        width: 100%;
+    }
+
+    .hero-content h1 {
+        font-size: 42px;
+        line-height: 1.1;
+    }
+
+    .hero-content p {
+        font-size: 15px;
+        line-height: 1.7;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .hero-buttons a,
+    .hero-buttons button {
+        width: 100%;
+        text-align: center;
+        box-sizing: border-box;
+    }
+
+
+    /* ---------- SEARCH ---------- */
+
+    .search-container {
+        padding: 30px 5%;
+    }
+
+    .property-search {
+        grid-template-columns: 1fr;
+        gap: 15px;
+    }
+
+    .search-button {
+        width: 100%;
+    }
+
+
+    /* ---------- PROPERTY GRID ---------- */
+
+    .property-grid {
+        grid-template-columns: 1fr;
+        gap: 25px;
+    }
+
+    .property-card {
+        width: 100%;
+    }
+
+    .property-image {
+        height: 260px;
+    }
+
+
+    /* ---------- SECTION HEADINGS ---------- */
+
+    .section-title,
+    .properties-page-header h1 {
+        font-size: 36px;
+    }
+
+    .section-description {
+        font-size: 15px;
+    }
+
+
+    /* ---------- ABOUT ---------- */
+
+    .about-section {
+        padding: 80px 5%;
+    }
+
+    .about-content {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ---------- SERVICES ---------- */
+
+    .services-grid {
+        grid-template-columns: 1fr;
+        gap: 20px;
+    }
+
+    .service-card {
+        padding: 30px 25px;
+    }
+
+
+    /* ---------- CONTACT ---------- */
+
+    .contact-content {
+        grid-template-columns: 1fr;
+    }
+
+    .contact-section {
+        padding: 80px 5%;
+    }
+
+
+    /* ---------- FOOTER ---------- */
+
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: 35px;
+    }
+
+    .footer {
+        padding: 50px 5% 30px;
+    }
+
+
+    /* ---------- PROPERTY DETAILS ---------- */
+
+    .property-details-page {
+        padding: 120px 5% 70px;
+    }
+
+    .property-details-image {
+        height: 300px;
+    }
+
+    .property-details-top {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .property-details-top h1 {
+        font-size: 34px;
+    }
+
+    .property-details-price {
+        font-size: 26px;
+    }
+
+    .property-feature-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .property-feature {
+        padding: 20px 15px;
+    }
+
+    .property-enquiry {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+
+    /* ---------- ENQUIRY FORM ---------- */
+
+    .enquiry-form-section {
+        padding: 25px;
+    }
+
+    .enquiry-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ---------- DASHBOARD ---------- */
+
+    .dashboard-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .dashboard-sidebar {
+        position: relative;
+        width: 100%;
+    }
+
+    .dashboard-main {
+        padding: 30px 5%;
+    }
+
+    .dashboard-stats {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 15px;
+    }
+
+    .dashboard-stat {
+        padding: 20px 15px;
+    }
+
+    .dashboard-stat strong {
+        font-size: 25px;
+    }
+
+
+    /* ---------- PROPERTY FORM ---------- */
+
+    .property-form {
+        grid-template-columns: 1fr;
+    }
+
+
+    /* ---------- LOGIN ---------- */
+
+    .login-page {
+        padding: 120px 5% 60px;
+    }
+
+    .login-card {
+        width: 100%;
+        max-width: 450px;
+        box-sizing: border-box;
+        padding: 30px 25px;
+    }
+
+
+    /* ---------- BUTTONS ---------- */
+
+    .gold-button,
+    .outline-button {
+        text-align: center;
+    }
+
+}
+
+
+/* =====================================================
+   SMALL MOBILE
+===================================================== */
+
+@media (max-width: 450px) {
+
+    .hero-content h1 {
+        font-size: 34px;
+    }
+
+    .property-image {
+        height: 230px;
+    }
+
+    .property-details-image {
+        height: 240px;
+    }
+
+    .property-feature-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .property-feature {
+        border-right: none;
+        border-bottom: 1px solid rgba(201, 162, 39, 0.25);
+    }
+
+    .dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+
+}

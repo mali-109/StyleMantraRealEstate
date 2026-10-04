@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+
+{% block title %}
+Add Property | Style Mantra
+{% endblock %}
+
+{% block content %}
+
+<section class="add-property-page">
+
+    <div class="add-property-container">
+
+        <div class="add-property-header">
+
+            <div>
+                <p class="section-label">
+                    OWNER PORTAL
+                </p>
+
+                <h1>
+                    Add New Property
+                </h1>
+
+                <p>
+                    Add a new property to your
+                    Style Mantra listings.
+                </p>
+            </div>
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="back-dashboard"
+            >
+                ← Back to Dashboard
+            </a>
+
+        </div>
+
+
+        <div class="property-form-card">
+
+            <form
+                method="POST"
+                enctype="multipart/form-data"
+                class="property-form"
+            >
+
+                <!-- PROPERTY INFORMATION -->
+
+                <div class="form-section">
+
+                    <h2>
+                        Property Information
+                    </h2>
+
+                    <p>
+                        Enter the basic details
+                        of the property.
+                    </p>
+
+                </div>
+
+
+                <div class="form-grid">
+
+                    <div class="form-group full-width">
+
+                        <label>
+                            Property Title
+                        </label>
+
+                        <input
+                            type="text"
+                            name="title"
+                            placeholder="e.g. Premium 2 BHK Apartment"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Property Type
+                        </label>
+
+                        <select
+                            name="property_type"
+                            required
+                        >
+
+                            <option value="">
+                                Select Property Type
+                            </option>
+
+                            <option value="Apartment">
+                                Apartment
+                            </option>
+
+                            <option value="Villa">
+                                Villa
+                            </option>
+
+                            <option value="Plot">
+                                Plot
+                            </option>
+
+                            <option value="Office">
+                                Office
+                            </option>
+
+                            <option value="Shop">
+                                Shop
+                            </option>
+
+                            <option value="Warehouse">
+                                Warehouse
+                            </option>
+
+                            <option value="Commercial">
+                                Commercial Property
+                            </option>
+
+                            <option value="Industrial">
+                                Industrial Property
+                            </option>
+
+                        </select>
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Price
+                        </label>
+
+                        <input
+                            type="text"
+                            name="price"
+                            placeholder="e.g. 85 Lakh"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Location
+                        </label>
+
+                        <input
+                            type="text"
+                            name="location"
+                            placeholder="e.g. Navi Mumbai"
+                            required
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Area
+                        </label>
+
+                        <input
+                            type="text"
+                            name="area"
+                            placeholder="e.g. 1250 sq.ft"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Bedrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="bedrooms"
+                            placeholder="e.g. 2"
+                            min="0"
+                        >
+
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <label>
+                            Bathrooms
+                        </label>
+
+                        <input
+                            type="number"
+                            name="bathrooms"
+                            placeholder="e.g. 2"
+                            min="0"
+                        >
+
+                    </div>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <div class="form-section description-section">
+
+                    <h2>
+                        Property Description
+                    </h2>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                        Description
+                    </label>
+
+                    <textarea
+                        name="description"
+                        rows="6"
+                        placeholder="Describe the property, amenities, location advantages, etc."
+                    ></textarea>
+
+                </div>
+
+
+                <!-- IMAGE -->
+                <div class="form-section">
+
+                    <h2>
+                      Property Image
+                    </h2>
+
+                    <p>
+                      Upload a photo of the property.
+                    </p>
+
+                </div>
+
+
+                <div class="form-group">
+
+                    <label>
+                      Property Image
+                    </label>
+
+                    <input
+                      type="file"
+                      name="image"
+                      accept=".jpg,.jpeg,.png,.webp"
+                    >
+
+                    <small>
+                       Supported formats: JPG, JPEG, PNG, WEBP
+                    </small>
+
+                </div>
+
+                <!-- BUTTONS -->
+
+                <div class="form-actions">
+
+                    <a
+                        href="{{ url_for('dashboard') }}"
+                        class="cancel-button"
+                    >
+                        Cancel
+                    </a>
+
+                    <button
+                        type="submit"
+                        class="gold-button"
+                    >
+                        Save Property
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

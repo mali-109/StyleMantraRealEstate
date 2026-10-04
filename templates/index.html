@@ -1,0 +1,725 @@
+{% extends "base.html" %}
+
+
+{% block title %}
+
+Style Mantra Real Estate | Premium Properties
+
+{% endblock %}
+
+
+{% block content %}
+
+
+<!-- =====================================================
+     HERO SECTION
+===================================================== -->
+
+<section class="hero">
+
+    <div class="hero-overlay"></div>
+
+
+    <div class="hero-content">
+
+        <p class="hero-small-title">
+            STYLE MANTRA REAL ESTATE
+        </p>
+
+
+        <h1>
+
+            Where
+            <span>Luxury</span>
+            Meets Opportunity
+
+        </h1>
+
+
+        <p class="hero-description">
+
+            Discover premium residential,
+            commercial and industrial properties
+            designed for your next move.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+            <a href="#properties"
+               class="gold-button">
+
+                Explore Properties
+
+            </a>
+
+
+            <a href="#contact"
+               class="outline-button">
+
+                Contact Us
+
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="hero-scroll">
+
+        <span></span>
+
+        Scroll to explore
+
+    </div>
+
+</section>
+
+
+<!-- =====================================================
+     SEARCH SECTION
+===================================================== -->
+
+<section class="search-section">
+
+    <div class="search-container">
+
+        <div class="search-heading">
+
+            <p>
+                FIND YOUR SPACE
+            </p>
+
+            <h2>
+                What are you looking for?
+            </h2>
+
+        </div>
+
+
+        <form
+            class="property-search"
+            method="GET"
+            action="{{ url_for('home') }}"
+        >
+
+            <!-- PROPERTY TYPE -->
+
+            <div class="search-field">
+
+                <label>
+                    Property Type
+                </label>
+
+                <select name="property_type">
+
+                    <option value="">
+                        All Properties
+                    </option>
+
+                    <option
+                        value="Residential"
+                        {% if property_type == "Residential" %}
+                        selected
+                        {% endif %}
+                    >
+                        Residential
+                    </option>
+
+                    <option
+                        value="Commercial"
+                        {% if property_type == "Commercial" %}
+                        selected
+                        {% endif %}
+                    >
+                        Commercial
+                    </option>
+
+                    <option
+                        value="Warehouse"
+                        {% if property_type == "Warehouse" %}
+                        selected
+                        {% endif %}
+                    >
+                        Warehouse
+                    </option>
+
+                    <option
+                        value="Industrial"
+                        {% if property_type == "Industrial" %}
+                        selected
+                        {% endif %}
+                    >
+                        Industrial
+                    </option>
+
+                    <option
+                        value="Plot"
+                        {% if property_type == "Plot" %}
+                        selected
+                        {% endif %}
+                    >
+                        Plot
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- LOCATION / SEARCH -->
+
+            <div class="search-field">
+
+                <label>
+                    Location or Property
+                </label>
+
+                <input
+                    type="text"
+                    name="search"
+                    value="{{ search }}"
+                    placeholder="Enter location or property name"
+                >
+
+            </div>
+
+
+            <!-- STATUS -->
+
+            <div class="search-field">
+
+                <label>
+                    Property Status
+                </label>
+
+                <select name="status">
+
+                    <option value="">
+                        Any Status
+                    </option>
+
+                    <option
+                        value="Available"
+                        {% if status == "Available" %}
+                        selected
+                        {% endif %}
+                    >
+                        Available
+                    </option>
+
+                    <option
+                        value="Sold"
+                        {% if status == "Sold" %}
+                        selected
+                        {% endif %}
+                    >
+                        Sold
+                    </option>
+
+                    <option
+                        value="Rented"
+                        {% if status == "Rented" %}
+                        selected
+                        {% endif %}
+                    >
+                        Rented
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- SEARCH BUTTON -->
+
+            <button
+                type="submit"
+                class="search-button"
+            >
+                Search
+            </button>
+
+        </form>
+
+
+        <!-- CLEAR SEARCH -->
+
+        {% if search or property_type or status %}
+
+        <div class="search-clear">
+
+            <a href="{{ url_for('home') }}">
+                Clear Search ×
+            </a>
+
+        </div>
+
+        {% endif %}
+
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     FEATURED PROPERTIES
+===================================================== -->
+
+<section class="properties-section"
+         id="properties">
+
+    <div class="section-container">
+
+        <div class="section-heading">
+
+            <div>
+
+                <p class="section-label">
+                    FEATURED PROPERTIES
+                </p>
+
+                <h2>
+                    Spaces That
+                    <span>Inspire</span>
+                </h2>
+
+            </div>
+
+            <a href="{{ url_for('home') }}#properties"
+               class="view-all">
+
+                View All Properties →
+
+            </a>
+
+        </div>
+
+
+        {% if properties %}
+
+        <div class="property-grid">
+
+            {% for property in properties %}
+
+            <article class="property-card">
+
+                <div class="property-image">
+
+                    {% if property["image"] %}
+
+                    <img
+                        src="{{ url_for(
+                            'static',
+                            filename=property['image']
+                        ) }}"
+                        alt="{{ property['title'] }}"
+                    >
+
+                    {% else %}
+
+                    <div class="property-placeholder">
+
+                        <span>
+                            {{ "%02d"|format(loop.index) }}
+                        </span>
+
+                        <div>
+                            {{ property["property_type"]|upper }}
+                        </div>
+
+                    </div>
+
+                    {% endif %}
+
+
+                    <span class="property-tag">
+                        {{ property["status"] }}
+                    </span>
+
+                </div>
+
+
+                <div class="property-info">
+
+                    <p class="property-type">
+                        {{ property["property_type"]|upper }}
+                    </p>
+
+                    <h3>
+                        {{ property["title"] }}
+                    </h3>
+
+                    <p class="property-location">
+                        📍 {{ property["location"] }}
+                    </p>
+
+
+                    <div class="property-details">
+
+                        {% if property["bedrooms"] %}
+                        <span>
+                            {{ property["bedrooms"] }} Beds
+                        </span>
+                        {% endif %}
+
+                        {% if property["bathrooms"] %}
+                        <span>
+                            {{ property["bathrooms"] }} Baths
+                        </span>
+                        {% endif %}
+
+                        {% if property["area"] %}
+                        <span>
+                            {{ property["area"] }}
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+
+                    <div class="property-bottom">
+
+                        <strong>
+                            ₹{{ property["price"] }}
+                        </strong>
+
+                        <a href="{{ url_for(
+                            'property_details',
+                            property_id=property['id']
+                        ) }}">
+
+                            View Details →
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </article>
+
+            {% endfor %}
+
+        </div>
+
+        {% else %}
+
+        <div class="no-properties">
+
+            <h3>
+                Properties Coming Soon
+            </h3>
+
+            <p>
+                Our latest property listings
+                will appear here.
+            </p>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+<!-- =====================================================
+     ABOUT SECTION
+===================================================== -->
+
+<section class="about-section"
+         id="about">
+
+    <div class="about-container">
+
+
+        <div class="about-content">
+
+            <p class="section-label">
+                ABOUT STYLE MANTRA
+            </p>
+
+
+            <h2>
+                Building Connections.
+                <span>Creating Opportunities.</span>
+            </h2>
+
+
+            <p>
+
+                Style Mantra Real Estate provides
+                carefully selected property solutions
+                across residential, commercial and
+                industrial segments.
+
+            </p>
+
+
+            <p>
+
+                Whether you are looking for a new
+                home, commercial space, investment
+                opportunity or warehouse,
+                our platform connects you with
+                properties that match your requirements.
+
+            </p>
+
+
+            <a href="#contact"
+               class="gold-button">
+
+                Know More About Us
+
+            </a>
+
+        </div>
+
+
+        <div class="about-statistics">
+
+            <div class="stat-box">
+
+                <strong>
+                    100+
+                </strong>
+
+                <span>
+                    Properties
+                </span>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <strong>
+                    50+
+                </strong>
+
+                <span>
+                    Happy Clients
+                </span>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <strong>
+                    10+
+                </strong>
+
+                <span>
+                    Locations
+                </span>
+
+            </div>
+
+
+            <div class="stat-box">
+
+                <strong>
+                    5+
+                </strong>
+
+                <span>
+                    Years Experience
+                </span>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     SERVICES
+===================================================== -->
+
+<section class="services-section"
+         id="services">
+
+    <div class="section-container">
+
+
+        <div class="section-heading centered">
+
+            <p class="section-label">
+                OUR SERVICES
+            </p>
+
+            <h2>
+                Real Estate,
+                <span>Reimagined.</span>
+            </h2>
+
+        </div>
+
+
+        <div class="services-grid">
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    01
+                </div>
+
+                <h3>
+                    Property Sales
+                </h3>
+
+                <p>
+                    Find the right property
+                    for your personal or
+                    investment needs.
+                </p>
+
+                <a href="#contact">
+                    Learn More →
+                </a>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    02
+                </div>
+
+                <h3>
+                    Property Leasing
+                </h3>
+
+                <p>
+                    Flexible leasing solutions
+                    for residential and
+                    commercial spaces.
+                </p>
+
+                <a href="#contact">
+                    Learn More →
+                </a>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    03
+                </div>
+
+                <h3>
+                    Commercial Real Estate
+                </h3>
+
+                <p>
+                    Premium offices, retail
+                    spaces and commercial
+                    opportunities.
+                </p>
+
+                <a href="#contact">
+                    Learn More →
+                </a>
+
+            </div>
+
+
+
+            <div class="service-card">
+
+                <div class="service-number">
+                    04
+                </div>
+
+                <h3>
+                    Warehouse Solutions
+                </h3>
+
+                <p>
+                    Industrial and warehouse
+                    spaces suitable for
+                    growing businesses.
+                </p>
+
+                <a href="#contact">
+                    Learn More →
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </div>
+
+</section>
+
+
+
+<!-- =====================================================
+     CONTACT CTA
+===================================================== -->
+
+<section class="contact-section"
+         id="contact">
+
+    <div class="contact-container">
+
+        <p class="section-label">
+            LET'S CONNECT
+        </p>
+
+
+        <h2>
+            Your Next Property
+            <span>Starts Here.</span>
+        </h2>
+
+
+        <p>
+            Tell us what you're looking for
+            and our team will help you find
+            the right opportunity.
+        </p>
+
+
+        <div class="contact-buttons">
+
+            <a href="tel:+919545351919"
+               class="gold-button">
+
+                Call Us
+
+            </a>
+
+
+            <a href="mailto:stylemantra1919@gmail.com"
+               class="outline-button">
+
+                Send Enquiry
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}

@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}
+Enquiry Details | Style Mantra
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <main class="dashboard-main">
+
+        <!-- HEADER -->
+
+        <div class="dashboard-top">
+
+            <div>
+
+                <p class="section-label">
+                    CUSTOMER ENQUIRY
+                </p>
+
+                <h1>
+                    Enquiry Details
+                </h1>
+
+                <p>
+                    View the customer's enquiry and
+                    property information.
+                </p>
+
+            </div>
+
+
+            <a
+                href="{{ url_for('enquiries') }}"
+                class="back-dashboard"
+            >
+                ← Back to Enquiries
+            </a>
+
+        </div>
+
+
+
+        <!-- ENQUIRY CARD -->
+
+        <div class="enquiry-details-card">
+
+
+            <!-- CUSTOMER -->
+
+            <div class="enquiry-detail-section">
+
+                <p class="section-label">
+                    CUSTOMER INFORMATION
+                </p>
+
+                <h2>
+                    {{ enquiry["name"] }}
+                </h2>
+
+
+                <div class="enquiry-contact-grid">
+
+                    <div>
+
+                        <span>
+                            EMAIL
+                        </span>
+
+                        <strong>
+                            {{ enquiry["email"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            PHONE
+                        </span>
+
+                        <strong>
+                            {{ enquiry["phone"] }}
+                        </strong>
+
+                    </div>
+
+
+                    <div>
+
+                        <span>
+                            ENQUIRY DATE
+                        </span>
+
+                        <strong>
+                            {{ enquiry["created_at"] }}
+                        </strong>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+            <!-- PROPERTY -->
+
+            <div class="enquiry-detail-section">
+
+                <p class="section-label">
+                    PROPERTY
+                </p>
+
+                <h2>
+                    {{ enquiry["property_title"] }}
+                </h2>
+
+                <p class="enquiry-property-location">
+                    📍 {{ enquiry["property_location"] }}
+                </p>
+
+            </div>
+
+
+
+            <!-- MESSAGE -->
+
+            <div class="enquiry-detail-section">
+
+                <p class="section-label">
+                    CUSTOMER MESSAGE
+                </p>
+
+                <div class="enquiry-full-message">
+
+                    {{ enquiry["message"] }}
+
+                </div>
+
+            </div>
+
+
+
+            <!-- ACTIONS -->
+
+            <div class="enquiry-detail-actions">
+
+                <a
+                    href="mailto:{{ enquiry['email'] }}"
+                    class="gold-button"
+                >
+                    ✉ Email Customer
+                </a>
+
+
+                <a
+                    href="tel:{{ enquiry['phone'] }}"
+                    class="outline-button"
+                >
+                    ☎ Call Customer
+                </a>
+
+
+                <a
+                    href="{{ url_for('enquiries') }}"
+                    class="cancel-button"
+                >
+                    Back
+                </a>
+
+            </div>
+
+
+        </div>
+
+    </main>
+
+</section>
+
+{% endblock %}

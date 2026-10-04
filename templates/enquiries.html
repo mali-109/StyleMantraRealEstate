@@ -1,0 +1,281 @@
+{% extends "base.html" %}
+
+{% block title %}
+Enquiries | Style Mantra
+{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <!-- SIDEBAR -->
+
+    <aside class="dashboard-sidebar">
+
+        <div class="dashboard-logo">
+
+            <img
+                src="{{ url_for(
+                    'static',
+                    filename='images/logo.png'
+                ) }}"
+                alt="Style Mantra"
+            >
+
+        </div>
+
+
+        <div class="sidebar-menu">
+
+            <a
+                href="{{ url_for('dashboard') }}"
+                class="sidebar-link"
+            >
+                🏠 Dashboard
+            </a>
+
+
+            <a
+                href="{{ url_for('add_property') }}"
+                class="sidebar-link"
+            >
+                ＋ Add Property
+            </a>
+
+
+            <a
+                href="{{ url_for('enquiries') }}"
+                class="sidebar-link active"
+            >
+                ✉ Enquiries
+            </a>
+
+
+            <a
+                href="{{ url_for('home') }}"
+                class="sidebar-link"
+            >
+                🌐 View Website
+            </a>
+
+
+            <a
+                href="{{ url_for('logout') }}"
+                class="sidebar-link logout"
+            >
+                ↪ Logout
+            </a>
+
+        </div>
+
+    </aside>
+
+
+    <!-- MAIN CONTENT -->
+
+    <main class="dashboard-main">
+
+
+        <!-- PAGE HEADER -->
+
+        <div class="dashboard-top">
+
+            <div>
+
+                <p class="section-label">
+                    CUSTOMER ENQUIRIES
+                </p>
+
+                <h1>
+                    Enquiries
+                </h1>
+
+                <p>
+                    View and manage enquiries
+                    received from your website.
+                </p>
+
+            </div>
+
+        </div>
+
+
+
+        <!-- ENQUIRY LIST -->
+
+        <div class="dashboard-table-container">
+
+
+            <div class="table-heading">
+
+                <h2>
+                    Customer Enquiries
+                </h2>
+
+            </div>
+
+
+
+            {% if enquiries %}
+
+
+            <div class="property-table">
+
+
+                <!-- TABLE HEADER -->
+
+                <div class="table-header">
+
+                    <span>
+                        Customer
+                    </span>
+
+                    <span>
+                        Property
+                    </span>
+
+                    <span>
+                        Contact
+                    </span>
+
+                    <span>
+                        Message
+                    </span>
+
+                    <span>
+                        Date
+                    </span>
+
+                </div>
+
+
+
+                <!-- ENQUIRY ROWS -->
+
+                {% for enquiry in enquiries %}
+
+                <div class="table-row">
+
+
+                    <!-- CUSTOMER -->
+
+                    <div class="table-property">
+
+                        <div>
+
+                            <a
+                                href="{{ url_for(
+                                    'enquiry_details',
+                                    enquiry_id=enquiry['id']
+                                ) }}"
+                                class="enquiry-customer-link"
+                            >
+
+                                {{ enquiry["name"] }}
+
+                            </a>
+
+
+                            <small>
+                                Enquiry #{{ enquiry["id"] }}
+                            </small>
+
+                        </div>
+
+                    </div>
+
+
+
+                    <!-- PROPERTY -->
+
+                    <div>
+
+                        <strong>
+                            {{ enquiry["property_title"] }}
+                        </strong>
+
+                        <small>
+                            {{ enquiry["property_location"] }}
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- CONTACT -->
+
+                    <div>
+
+                        <strong>
+                            {{ enquiry["email"] }}
+                        </strong>
+
+                        <small>
+                            {{ enquiry["phone"] }}
+                        </small>
+
+                    </div>
+
+
+
+                    <!-- MESSAGE -->
+
+                    <div class="enquiry-message">
+
+                        {{ enquiry["message"] }}
+
+                    </div>
+
+
+
+                    <!-- DATE -->
+
+                    <div>
+
+                        {{ enquiry["created_at"] }}
+
+                    </div>
+
+
+                </div>
+
+                {% endfor %}
+
+
+            </div>
+
+
+            {% else %}
+
+
+            <!-- EMPTY STATE -->
+
+            <div class="empty-dashboard">
+
+                <div>
+                    ✉
+                </div>
+
+                <h3>
+                    No Enquiries Yet
+                </h3>
+
+                <p>
+                    Customer enquiries will appear
+                    here when visitors contact you
+                    about a property.
+                </p>
+
+            </div>
+
+
+            {% endif %}
+
+
+        </div>
+
+    </main>
+
+</section>
+
+{% endblock %}
